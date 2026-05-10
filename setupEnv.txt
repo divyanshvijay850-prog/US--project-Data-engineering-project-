@@ -38,3 +38,18 @@ ls
 
 -- to add all git file
 git add .
+
+
+
+
+
+
+
+
+
+command not found for code means the Visual Studio Code terminal command is not installed yet on your Mac.
+Cmd + Shift + P
+
+
+3. Search for:
+Shell Command: Install 'code' command in PATH

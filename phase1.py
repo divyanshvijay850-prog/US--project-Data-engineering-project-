@@ -66,14 +66,45 @@ def download_bts_month(year, month, dest_dir):
 
     print(f"  [DOWNLOAD] {year}-{month:02d} → {url}")
     try:
+        '''
+        url
+→ the file/web address to download from
+stream=True
+→ do NOT load the whole file into memory at once
+→ download piece by piece (important for large files)
+timeout=120
+→ wait maximum 120 seconds before failing
+
+
+w → write mode
+b → binary mode
+
+Binary mode is required for zip/images/videos/etc.
+
+read 1 MB
+write 1 MB
+repeat
+
+This is memory efficient.
+
+Internet File
+      ↓
+requests.get()
+      ↓
+Download in chunks
+      ↓
+Write chunks to local file
+      ↓
+Saved as ZIP file
+        '''
         resp = requests.get(url, stream=True, timeout=120)
         resp.raise_for_status()
 
+
+        # ONLY THE ZIP FILE DOWNLOAD IS THERE ( NO CSV FILE)
         with open(local_zip, "wb") as f:
             for chunk in resp.iter_content(chunk_size=1024 * 1024):
                 f.write(chunk)
-
-  
 
     except Exception as e:
         print(f"  [ERROR] {year}-{month:02d}: {e}")
